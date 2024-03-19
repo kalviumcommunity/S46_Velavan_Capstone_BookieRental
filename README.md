@@ -16,8 +16,8 @@ Bookie-Rental is a web-based platform designed to facilitate the sharing of book
 
 ###                                                             Daily Plan
 
--                                                         Day 1 - Finalise Idea
--                                                         Day 2 - Low-fid design
--                                                         Day 3 - High-fid design
--                                                         Day 4 - Setting Backend
--                                                         Day 5 - Starting with front-end
+*                                                         Day 1 - Finalise Idea
+*                                                         Day 2 - Low-fid design
+*                                                         Day 3 - High-fid design
+*                                                         Day 4 - Setting Backend
+*                                                         Day 5 - Starting with front-end
