@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.json({Status: 'Running'});
+    res.json({Status: 'Running'})
 })
 
 app.listen(3000, () => {
