@@ -2,7 +2,7 @@
 
 ### Project Overview :
 
-Bookie-Rental is a web-based platform designed to facilitate the sharing of books among users. It provides a convenient solution for individuals who have completed reading a book and wish to rent it out to others, as well as for those seeking to borrow or purchase books from fellow users.
+Bookie-Rental is a web-based platform designed to facilitate the sharing of books among users. It provides a convenient solution for individuals who have completed reading a book and wish to rent it out to others , as well as for those seeking to borrow or purchase books from fellow users.
 
 ### Features :
 
