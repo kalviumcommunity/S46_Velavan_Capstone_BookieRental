@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const app = express();
+const app = require('./routes');
 
 app.get('/', (req, res) => {
     res.json({Status: 'Running'})
