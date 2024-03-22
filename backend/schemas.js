@@ -11,6 +11,7 @@ const  userSchema = new mongoose.Schema({
 // Schema for books collection
 
 const bookSchema = new mongoose.Schema({
+    image:{type: String},
     title: { type: String, trim: true, required: true },
     author: { type: String, trim: true, required: true },
     description: { type: String, trim: true, required: true },
