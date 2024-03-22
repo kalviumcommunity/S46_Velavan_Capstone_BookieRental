@@ -17,7 +17,7 @@ app.get('/users', (req, res) => {
     }
 })
 
-//Post endpoint for Users
+//POST endpoint for Users
 
 app.post('/users',async(req,res) => {
     try{
@@ -30,7 +30,7 @@ app.post('/users',async(req,res) => {
     }
 })
 
-//Post endpoint for Books
+//POST endpoint for Books
 
 app.post('/books',async(req, res) => {
     try{
@@ -42,5 +42,33 @@ app.post('/books',async(req, res) => {
         res.status(500).send(err);
     }
 })
+
+//PUT endpoint for Users
+
+app.put('/users/:name',async(req, res) => {
+    try{
+        const {name} = req.params;
+        const updatedUser = await User.findOneAndUpdate({name} , req.body , {new:true});
+        res.json(updatedUser);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send(err);
+    }
+});
+
+//PUT endpoint for Books
+
+app.put('/books/:id',async(req, res) => {
+    try{
+        const {id} = req.params;
+        const updatedBook = await Book.findByIdAndUpdate(id , req.body , {new:true});
+        res.json(updatedBook);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send(err);
+    }
+});
 
 module.exports = app;

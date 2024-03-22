@@ -1,0 +1,19 @@
+meta {
+  name: Users-PUT
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:3000/users/Dummy01
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Dummy01",
+    "email": "dum1@gmail.com",
+    "password": "dummy01"
+  }
+}
