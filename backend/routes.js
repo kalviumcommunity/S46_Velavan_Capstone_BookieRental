@@ -7,11 +7,27 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/users', (req, res) => {
-    try {
-        res.json({name : "User1"});
+//GET endpoint for Users
+
+app.get('/users',async(req, res) => {
+    try{
+        const users = await User.find();
+        res.json(users);
     }
-    catch (err) {
+    catch(err){
+        console.log(err);
+        res.status(500).send(err);
+    }
+})
+
+//GET endpoint for Books
+
+app.get('/books',async(req, res) => {
+    try{
+        const books = await Book.find();
+        res.json(books);
+    }
+    catch(err){
         console.log(err);
         res.status(500).send(err);
     }
