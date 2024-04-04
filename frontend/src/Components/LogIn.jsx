@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/1.png';
 
-const SignUp = () => {
-
+const LogIn = () => {
+    
     const [name,setName] = useState("");
-    const [email,setEmail] = useState("");
     const [pass,setPass] = useState("");
-
+    
     return (
         <>
       
@@ -21,16 +20,16 @@ const SignUp = () => {
                     Home
                     </button>
                 </Link>
-  
+
             </div>
 
             <div className='w-screen h-[85.5dvh] bg-red-200 flex items-center justify-center'>
-                
+    
                 <form className='flex flex-col items-center justify-around px-3 bg-white h-[80dvh] w-[28vw] rounded-lg'>
 
                     <div className='flex flex-col items-center justify-between'>
-                        <h2 className="text-3xl text-red-500 font-semibold mb-2">Hey , New User !</h2>
-                        <hr className=" w-72 border-b-2 border-red-500" />
+                        <h2 className="text-3xl text-red-500 font-semibold mb-2">Welcome Back !</h2>
+                        <hr className="w-72 border-b-2 border-red-500" />
                     </div>
 
                     <div>
@@ -38,23 +37,19 @@ const SignUp = () => {
                     </div>
 
                     <div>
-                        <input type='text' placeholder='Email' required onChange={(e)=>{setEmail(e.target.value)}} className="w-[15vw] px-4 py-2 bg-red-100 text-center rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
-                    </div>
-
-                    <div>
                         <input type='text' placeholder='Password' required onChange={(e)=>{setPass(e.target.value)}} className="w-[15vw] px-4 py-2 bg-red-100 text-center rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
                     </div>
 
-                    <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500" onClick={()=>console.log(name,email,pass)}>CONFIRM</button>
+                    <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500" onClick={()=>console.log(name,pass)}>CONFIRM</button>
 
                     <div className='flex flex-col items-center justify-between h-32 mb-7'>
                         
                         <hr className=" w-72 border-b-2 border-red-500 mt-4" />
 
-                        <div className="text-black">Already a User ? Then just</div>
+                        <div className="text-black">New to our site ? Then just</div>
 
-                        <Link to='/login'>
-                        <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">Log In</button>
+                        <Link to='/signup'>
+                        <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">Sign Up</button>
                         </Link>
                     
                     </div>
@@ -67,4 +62,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default LogIn
