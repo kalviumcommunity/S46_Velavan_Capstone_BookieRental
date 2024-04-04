@@ -3,6 +3,7 @@ import './App.css'
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './Components/Home';
 import SignUp from './Components/SignUp';
+import LogIn from './Components/LogIn';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +17,7 @@ function App() {
           
           <Route path='/' element={<Home/>} />
           <Route path='/signup' element={<SignUp/>} />
+          <Route path='/login' element={<LogIn/>} />
         
         </Routes>
       
