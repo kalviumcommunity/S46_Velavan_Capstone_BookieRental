@@ -1,0 +1,11 @@
+.loading-bar {
+    height: 5px;
+    background-color: #007bff;
+    animation: loadingAnimation 1.5s linear forwards;
+}
+  
+@keyframes loadingAnimation {
+    0% { width: 0; }
+    50% { width: 50%; }
+    100% { width: 100%; }
+}
