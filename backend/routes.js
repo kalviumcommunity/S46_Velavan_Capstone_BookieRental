@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const {User , Book} = require('./schemas');
+const {joiUser , joiBooks} = require('./joiSchemas');
 
 const app = express();
 app.use(cors());
@@ -33,14 +34,39 @@ app.get('/books',async(req, res) => {
     }
 })
 
-//POST endpoint for Users
+//POST endpoint for Users sign-up
 
 app.post('/users',async(req,res) => {
     try{
+        const {error , value} = joiUser.validate(req.body);
+        if (error){
+            console.log(error);
+            return res.status(400).send(error.details[0].message)
+        }
         const newUser = await User.create(req.body);
         res.json(newUser);
     }
     catch(err){
+        console.log(err);
+        res.status(500).send(err);
+    }
+})
+
+//POST endpoint for Users Log-In
+
+app.post('/users/login' , async(req,res) => {
+    try{
+        const {name , password} = req.body;
+        const user = await User.findOne({name});
+        if (!user){
+            return res.status(401).send("Username Not Found");
+        }
+        const passValid = await user.comparePassword(password);
+        if (!passValid){
+            return res.status(401).send("Incorrect Password");
+        }
+        res.json("success")
+    } catch(err){
         console.log(err);
         res.status(500).send(err);
     }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 import logo from '../assets/1.png';
 
 const SignUp = () => {
@@ -8,6 +10,55 @@ const SignUp = () => {
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [pass,setPass] = useState("");
+    const navigate = useNavigate();
+    const [status,setStatus] = useState(false);
+    const [err,setErr] = useState(null);
+
+    const postIt = async(e) => {
+        e.preventDefault();
+        
+        const firstResponse = await axios.get('http://localhost:3000/users');
+        const users = firstResponse.data;
+        const existingUser = users.find(user => user.email === email);
+        if (existingUser) {
+            setStatus(false);
+            setErr({ response: { data: "Account already exists, Go Log in." } });
+            setTimeout(() => {
+                navigate('/signin');
+            }, 1000)
+            return;
+        }
+
+        const existingUserName = users.find(user => user.name === name);
+        if (existingUserName){
+            setStatus(false);
+            setErr({ response : { data : "Username Already Taken" } })
+            return;
+        }
+
+        try {
+            await axios.post('http://localhost:3000/users', {
+                name: name,
+                email: email,
+                password: pass
+            });
+            console.log("Posted Successfully");
+            setName("");
+            setEmail("");
+            setPass("");
+            Cookies.set("Username", name);
+            setStatus(true);
+            setErr(null);
+            setTimeout(() => {
+                navigate('/');
+            }, 1500);
+
+        }   catch (err) {
+            console.log(err);
+            setStatus(false);
+            setErr(err);
+            }
+    }
 
     return (
         <>
@@ -38,14 +89,18 @@ const SignUp = () => {
                     </div>
 
                     <div>
-                        <input type='text' placeholder='Email' required onChange={(e)=>{setEmail(e.target.value)}} className="w-[15vw] px-4 py-2 bg-red-100 text-center rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
+                        <input type='email' placeholder='Email' required onChange={(e)=>{setEmail(e.target.value)}} className="w-[15vw] px-4 py-2 bg-red-100 text-center rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
                     </div>
 
                     <div>
-                        <input type='text' placeholder='Password' required onChange={(e)=>{setPass(e.target.value)}} className="w-[15vw] px-4 py-2 bg-red-100 text-center rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
+                        <input type='password' placeholder='Password' required onChange={(e)=>{setPass(e.target.value)}} className="w-[15vw] px-4 py-2 bg-red-100 text-center rounded-md focus:outline-none focus:ring focus:border-blue-500"/>
                     </div>
 
-                    <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500" onClick={()=>console.log(name,email,pass)}>CONFIRM</button>
+                    <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500" onClick={postIt}>CONFIRM</button>
+
+                    {status && <div className="loading-bar"></div>}
+
+                    {err && <h3>{err.response.data}</h3>}
 
                     <div className='flex flex-col items-center justify-between h-32 mb-7'>
                         
