@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import logo from '../assets/1.png';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Home = () => {
 
@@ -10,6 +11,14 @@ const Home = () => {
   const logOut = () => {
     Cookies.remove('Username')
   }
+  const [books , setBooks] = useState([]);
+  const [errMessage , setErrMessage] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/books')
+    .then( (res) => {setBooks(res.data)} )
+    .catch( (err) => {console.log(err) , setErrMessage(err)} )
+  } , [books] )
     
   return (
     <>
@@ -28,13 +37,27 @@ const Home = () => {
       
       </div>
 
-      <div className='w-screen h-[85.5dvh] bg-red-200'>
-        <h1 className='text-center text-4xl font-bold'>Welcome to BookieRental</h1>
-        <p className='text-center text-xl font-bold mt-5'>Find your next book</p>
-        <p className='text-center text-xl font-bold mt-5'>Rent your favourite books</p>
-        <p className='text-center text-xl font-bold mt-5'>And more...</p>
-        <p className='text-center text-xl font-bold mt-5'>Enjoy your stay</p>
-        <p className='text-center text-xl font-bold mt-5'>And don't forget to rate us</p>
+      <div className='w-screen h-[85.5dvh] bg-red-200 flex items-center justify-center'>
+        
+        {errMessage ? 
+        
+          (<div style={{display:'flex',flexDirection:'column',height:'7vh',alignItems:'center'}}>
+          <h4>{errMessage}</h4>
+          <h5>Please Log out and try logging in again.</h5>
+          </div>) :
+        
+          (books.map((book) => {
+            return (
+              <div className='flex flex-col items-center justify-between h-[20%] w-[30vw] bg-white rounded-lg border-2 border-red-500'>
+                <h3>{book.title}</h3>
+                <h4>{book.author}</h4>
+                <h4>{book.description}</h4>
+              </div>
+            )
+          }))
+
+        }
+
       </div>
 
     </>
