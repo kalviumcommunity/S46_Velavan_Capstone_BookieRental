@@ -12,7 +12,8 @@ const joiBooks = joi.object({
     description : joi.string().required(),
     status : joi.string().required(),
     rent : joi.string(),
-    price : joi.number()
+    price : joi.number(),
+    user : joi.string()
 })
 
 module.exports = { joiUser, joiBooks };
