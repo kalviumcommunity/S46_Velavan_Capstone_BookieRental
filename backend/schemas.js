@@ -21,7 +21,8 @@ const bookSchema = new mongoose.Schema({
     description: { type: String, trim: true, required: true },
     status: { type: String, trim: true, required: true },
     rent: { type: String, trim: true },
-    price: { type: Number, trim: true }
+    price: { type: Number, trim: true },
+    user : { type: String, trim: true}
 });
 
 // Modals for users and books collections
