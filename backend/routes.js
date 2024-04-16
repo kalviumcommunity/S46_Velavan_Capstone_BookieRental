@@ -113,4 +113,32 @@ app.put('/books/:id',async(req, res) => {
     }
 });
 
+//DELETE endpoint for Users
+
+app.delete('/users/:name',async(req, res) => {
+    try{
+        const {name} = req.params;
+        const deletedUser = await User.findOneAndDelete({name});
+        res.status(200).json(deletedUser);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send(err);
+    }
+});
+
+//DELETE endpoint for Books
+
+app.delete('/books/:id',async(req, res) => {
+    try{
+        const {id} = req.params;
+        const deletedBook = await Book.findByIdAndDelete(id);
+        res.status(200).json(deletedBook);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send(err);
+    }
+}); 
+
 module.exports = app;
