@@ -11,7 +11,6 @@ import logo from '../assets/1.png';
 
 const AddPost = () => {
 
-  const navigate = useNavigate();
   const [err,setErr] = useState(null);
   const [title,setTitle] = useState('');
   const [author,setAuthor] = useState('');
@@ -71,9 +70,14 @@ const AddPost = () => {
       navigate('/shelf')
 
     } catch(err){
-      setErr(err.message);
-    }
-
+      if(err.response.status===401){
+        setErr('No Authentication Token Provided')
+      } else if (err.response.status===403){
+        setErr('Authentication Token has Expred')
+      } else{
+        setErr(err.response.data)
+      }
+      }
   }
 
   return (
