@@ -52,7 +52,7 @@ const Home = () => {
         
           (books.map((book) => {
             return (
-              <div className='flex flex-col items-center justify-between h-[20%] w-[30vw] bg-white rounded-lg border-2 border-red-500'>
+              <div className='flex flex-col items-center justify-between h-[20%] w-[30vw] bg-white rounded-lg border-2 border-red-500' key={book._id}>
                 <h3>{book.title}</h3>
                 <h4>{book.author}</h4>
                 <h4>{book.description}</h4>
