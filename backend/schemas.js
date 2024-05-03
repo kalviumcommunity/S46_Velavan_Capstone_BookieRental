@@ -18,7 +18,7 @@ const bookSchema = new mongoose.Schema({
     image:{type: String},
     title: { type: String, trim: true, required: true },
     author: { type: String, trim: true, required: true },
-    description: { type: String, trim: true, required: true },
+    genre: { type: String, trim: true, required: true },
     status: { type: String, trim: true, required: true },
     rent: { type: String, trim: true },
     price: { type: Number, trim: true },

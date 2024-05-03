@@ -29,7 +29,7 @@ const Shelf = () => {
       
       <div className='navbar flex items-center justify-between bg-red-300 h-[6.5rem] border-b-4 border-red-500'>
     
-        <img src={logo} className="h-44 w-44" alt="Logo" />
+        <Link to='/'><img src={logo} className="h-44 w-44" alt="Logo" /></Link>
 
         <Link to='/'><span className='text-red-600 font-semibold text-lg'>Home</span></Link>
 

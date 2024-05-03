@@ -7,13 +7,14 @@ const joiUser = joi.object({
 })
 
 const joiBooks = joi.object({
+    image: joi.string().required(),
     title : joi.string().required(),
     author : joi.string().required(),
-    description : joi.string().required(),
+    genre : joi.string().required(),
     status : joi.string().required(),
     rent : joi.string(),
     price : joi.number(),
-    user : joi.string()
+    user : joi.string().required()
 })
 
 module.exports = { joiUser, joiBooks };
