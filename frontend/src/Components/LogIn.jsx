@@ -40,7 +40,7 @@ const LogIn = () => {
       
             <div className='navbar flex items-center justify-between bg-red-300 h-[6.5rem] border-b-4 border-red-500'>
     
-                <img src={logo} className="h-44 w-44" alt="Logo" />
+                <Link to='/'><img src={logo} className="h-44 w-44" alt="Logo" /></Link>
 
                 <Link to='/'>
                     <button className="bg-white hover:bg-red-600 hover:text-white text-red-600 font-bold px-4 py-2 rounded-xl w-28 m-7">
