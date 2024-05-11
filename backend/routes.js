@@ -21,7 +21,7 @@ const authenticate = (req, res, next) => {
     }
     const authToken = token.split('Bearer ')[1];
     try {
-        const decoded = jwt.verify(authToken, "Kaizoku-0nii-0rewaaNaaru");
+        const decoded = jwt.verify(authToken, process.env.JWT_SECRET_KEY);
         req.user = decoded
         next()
     } catch (error) {
@@ -48,6 +48,21 @@ app.get('/books',async(req, res) => {
     try{
         const books = await Book.find();
         res.json(books);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send(err);
+    }
+})
+
+//GET endpoint for Books by ID
+
+app.get('/books/:id',async(req, res) => {
+    try{
+        const {id} = req.params;
+        const book = await Book.findById(id);
+        if (!book){return res.status(404).json({message : "Book Not Found"})}
+        res.json(book);
     }
     catch(err){
         console.log(err);

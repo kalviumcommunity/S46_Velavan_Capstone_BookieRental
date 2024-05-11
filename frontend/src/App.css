@@ -9,3 +9,8 @@
     50% { width: 50%; }
     100% { width: 100%; }
 }
+
+body::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }  

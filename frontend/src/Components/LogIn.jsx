@@ -16,13 +16,14 @@ const LogIn = () => {
     const logIt = async(e) => {
         e.preventDefault();
         try{
-            await axios.post('http://localhost:3000/users/login',{
+            const response = await axios.post('http://localhost:3000/users/login',{
                 name : name,
                 password : pass
             });
             setName("");
             setPass("");
             Cookies.set("Username",name);
+            Cookies.set('Token',response.data.token);
             setStatus(true);
             setErr(null);
             setTimeout(() => {
@@ -80,7 +81,7 @@ const LogIn = () => {
                         <div className="text-black">New to our site ? Then just</div>
 
                         <Link to='/signup'>
-                        <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">Sign Up</button>
+                        <button className="w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md">Sign Up</button>
                         </Link>
                     
                     </div>

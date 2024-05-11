@@ -11,6 +11,7 @@ const Shelf = () => {
   const navigate = useNavigate();
   const logOut = () => {
     Cookies.remove('Username')
+    Cookies.remove('Token')
     navigate('/')
   }
   const [books , setBooks] = useState([]);
@@ -24,10 +25,16 @@ const Shelf = () => {
 
   const filteredBooks = books.filter((book) => book.user === Username);
 
+  const handleDelete = (id) => {
+    axios.delete('http://localhost:3000/books/'+id,{headers : {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    .then( (res)=> {console.log(res.data)} )
+    .catch( (err) => {console.log(err)} )
+  }
+
   return (
     <>
       
-      <div className='navbar flex items-center justify-between bg-red-300 h-[6.5rem] border-b-4 border-red-500'>
+      <div className='navbar sticky top-0 flex items-center justify-between bg-red-300 h-[6.5rem] border-b-4 border-red-500'>
     
         <Link to='/'><img src={logo} className="h-44 w-44" alt="Logo" /></Link>
 
@@ -48,18 +55,25 @@ const Shelf = () => {
         <h5>Please Log out and try logging in again.</h5>
         </div>) :
       
-       (<div className='w-screen h-[85.5dvh] bg-red-200 flex flex-col items-center justify-normal'>
+       (<div className='w-100 h-screen bg-red-200 flex items-center justify-between flex-wrap'>
 
-          <div className='flex items-center justify-center w-full mt-6 h-10 mb-6'>
+          <div className='flex items-center justify-center w-full '>
             <Link to='/newpost'><button className="bg-red-600 hover:bg-white hover:text-red-600 text-white font-bold px-4 py-2 rounded-xl w-28 ">Add Post</button></Link>
           </div>        
         
           {filteredBooks.map((book) => {
             return (
-              <div className='flex flex-col items-center justify-between h-[20%] w-[30vw] bg-white rounded-lg border-2 border-red-500'>
-                <h3>{book.title}</h3>
-                <h4>{book.author}</h4>
-                <h4>{book.description}</h4>
+              <div className='flex flex-col items-center justify-evenly h-96 w-72 bg-white rounded-lg' key={book._id}>
+                
+                <img src={book.image} className="h-48 w-44 rounded-lg" />
+                <h3 className='text-lg font-medium'>{book.title}</h3>
+                <div className='flex justify-between items-center w-56'>
+                  <Link to={`/update/${book._id}`}>
+                    <button className="w-24 hover:bg-red-600 hover:text-white bg-white text-red-800 border-2 border-red-500 py-2 rounded-lg">Update</button>
+                  </Link>
+                  <button className="w-24 hover:bg-red-600 hover:text-white bg-white text-red-800 border-2 border-red-500 py-2 rounded-lg" onClick={()=>handleDelete(book._id)}>Delete</button>
+                </div>
+
               </div>
             )
           })}

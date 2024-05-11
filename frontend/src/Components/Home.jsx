@@ -10,6 +10,7 @@ const Home = () => {
   const Username = Cookies.get('Username');
   const logOut = () => {
     Cookies.remove('Username')
+    Cookies.remove('Token')
   }
   const [books , setBooks] = useState([]);
   const [errMessage , setErrMessage] = useState('');
@@ -23,7 +24,7 @@ const Home = () => {
   return (
     <>
       
-      <div className='navbar flex items-center justify-between bg-red-300 h-[6.5rem] border-b-4 border-red-500'>
+      <div className='navbar sticky top-0 flex items-center justify-between bg-red-300 h-[6.5rem] border-b-4 border-red-500'>
     
         <img src={logo} className="h-44 w-44" alt="Logo" />
 
@@ -41,7 +42,7 @@ const Home = () => {
       
       </div>
 
-      <div className='w-screen h-[85.5dvh] bg-red-200 flex items-center justify-center'>
+      <div className='w-100 h-screen bg-red-200 flex items-center justify-between flex-wrap'>
         
         {errMessage ? 
         
@@ -52,10 +53,9 @@ const Home = () => {
         
           (books.map((book) => {
             return (
-              <div className='flex flex-col items-center justify-between h-[20%] w-[30vw] bg-white rounded-lg border-2 border-red-500' key={book._id}>
-                <h3>{book.title}</h3>
-                <h4>{book.author}</h4>
-                <h4>{book.description}</h4>
+              <div className='flex flex-col items-center justify-between h-56 w-56' key={book._id}>
+                <img src={book.image} className="h-48 w-44 rounded-lg" />
+                <h3 className='text-lg font-medium'>{book.title}</h3>
               </div>
             )
           }))
