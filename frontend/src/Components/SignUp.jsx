@@ -37,7 +37,7 @@ const SignUp = () => {
         }
 
         try {
-            await axios.post('http://localhost:3000/users', {
+            const response = await axios.post('http://localhost:3000/users', {
                 name: name,
                 email: email,
                 password: pass
@@ -47,6 +47,7 @@ const SignUp = () => {
             setEmail("");
             setPass("");
             Cookies.set("Username", name);
+            Cookies.set('Token',response.data.token);
             setStatus(true);
             setErr(null);
             setTimeout(() => {
@@ -63,7 +64,7 @@ const SignUp = () => {
     return (
         <>
       
-            <div className='navbar flex items-center justify-between bg-red-300 h-[6.5rem] border-b-4 border-red-500'>
+            <div className='navbar items-center justify-between bg-red-300 h-[6.5rem] border-b-4 border-red-500'>
     
                 <Link to='/'><img src={logo} className="h-44 w-44" alt="Logo" /></Link>
 

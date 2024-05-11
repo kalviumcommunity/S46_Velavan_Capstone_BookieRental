@@ -11,13 +11,14 @@ import logo from '../assets/1.png';
 
 const AddPost = () => {
 
-  const [err,setErr] = useState(null);
+  const [err,setErr] = useState(null); 
   const [title,setTitle] = useState('');
   const [author,setAuthor] = useState('');
   const [genre,setGenre] = useState('');
   const [status,setStatus] = useState('');
   const [amount,setAmount] = useState('');
   const [img,setImg] = useState(null);
+  const navigate = useNavigate();
 
   const uploadImage = async (file) => {
     
@@ -66,14 +67,16 @@ const AddPost = () => {
         postData.price = amount;
       }
       
-      await axios.post('http://localhost:3000/books/',postData);
-      navigate('/shelf')
+      await axios.post('http://localhost:3000/books/',postData,{headers : {Authorization: `Bearer ${Cookies.get('Token')}`}})
+      .then(()=>{
+        navigate('/shelf')
+      }) 
 
     } catch(err){
       if(err.response.status===401){
         setErr('No Authentication Token Provided')
       } else if (err.response.status===403){
-        setErr('Authentication Token has Expred')
+        setErr('Authentication Token has Expired')
       } else{
         setErr(err.response.data)
       }
@@ -143,7 +146,13 @@ const AddPost = () => {
             <input type='file' required onChange={(e)=>setImg(e.target.files[0])} className=" w-[13rem] text-center "/>
           </div>
 
-          <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500" onClick={handleConfirm}>CONFIRM</button>
+          <div className='flex w-[19rem] justify-between items-center'>
+
+            <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500" onClick={()=>navigate('/shelf')}>BACK</button>
+
+            <button className=" w-28 bg-red-500 hover:bg-red-600 text-white py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500" onClick={handleConfirm}>CONFIRM</button>
+
+          </div>
 
           {err && <h3>{err}</h3>}
 
