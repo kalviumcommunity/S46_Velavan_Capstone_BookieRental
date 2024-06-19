@@ -21,3 +21,7 @@ Bookie-Rental is a web-based platform designed to facilitate the sharing of book
 *                                                         Day 3 - High-fid design
 *                                                         Day 4 - Setting Up Backend
 *                                                         Day 5 - Starting with front-end
+
+### Deployed Backend Link :
+
+https://capstone-bookierental.onrender.com
