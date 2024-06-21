@@ -25,3 +25,7 @@ Bookie-Rental is a web-based platform designed to facilitate the sharing of book
 ### Deployed Backend Link :
 
 https://capstone-bookierental.onrender.com
+
+### Deployed Frontend Link : 
+
+https://bookierental.onrender.com
