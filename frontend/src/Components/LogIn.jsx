@@ -72,7 +72,7 @@ const LogIn = () => {
 
                     {status && <div className="loading-bar"></div>}
 
-                    {err && <h3>{err.response.data}</h3>}
+                    {err && <h3>{err.response?.data || err.message}</h3>}
 
                     <div className='flex flex-col items-center justify-between h-32 mb-7'>
                         

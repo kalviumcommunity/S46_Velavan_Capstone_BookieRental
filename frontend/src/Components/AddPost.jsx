@@ -73,12 +73,12 @@ const AddPost = () => {
       }) 
 
     } catch(err){
-      if(err.response.status===401){
+      if(err.response?.status===401){
         setErr('No Authentication Token Provided')
-      } else if (err.response.status===403){
+      } else if (err.response?.status===403){
         setErr('Authentication Token has Expired')
       } else{
-        setErr(err.response.data)
+        setErr(err.response?.data || err.message || 'An error occurred')
       }
       }
   }
